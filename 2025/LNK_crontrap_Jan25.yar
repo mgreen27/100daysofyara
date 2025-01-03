@@ -22,6 +22,5 @@ rule lnk_crontrap_like_jan25 {
     condition:
         lnk.cmd_line_args contains "-windowstyle hidden -c Expand-Archive -Path"
         and lnk.cmd_line_args contains "; Invoke-Command {cmd.exe /c"
-        and lnk.cmd_line_args contains ".bat"
-
+        and lnk.cmd_line_args icontains ".bat"
 }

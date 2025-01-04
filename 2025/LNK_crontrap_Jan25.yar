@@ -13,14 +13,13 @@ rule lnk_crontrap_jan25 {
         or lnk.drive_serial_number == 3774635658
 }
 
-rule lnk_crontrap_like_jan25 {
+rule lnk_crontrap_ps_jan25 {
     meta:
         description = "Detects LNK files with similar powershell to CRON#TRAP campaign"
         author = "Matt Green - @mgreen27"
         date = "2025-01-03"
         reference = "https://www.securonix.com/blog/crontrap-emulated-linux-environments-as-the-latest-tactic-in-malware-staging/"
     condition:
-        lnk.cmd_line_args contains "-windowstyle hidden -c Expand-Archive -Path"
-        and lnk.cmd_line_args contains "; Invoke-Command {cmd.exe /c"
-        and lnk.cmd_line_args icontains ".bat"
+        lnk.cmd_line_args icontains "-windowstyle hidden -c Expand-Archive -Path"
+        and lnk.cmd_line_args icontains "; Invoke-Command {cmd.exe /c"
 }

@@ -1,7 +1,7 @@
 rule sus_crontrap_img_jan25 {
     meta:
         author = "Matt Green - @mgreen27"
-        description = "Detects suspicious tinycore linux image by checking for MBR header at offset 510 and tubycore strings"
+        description = "Detects suspicious tinycore linux image by checking for MBR header at offset 510 and tinycore strings"
         date = "2025-01-04"
         reference = "https://www.securonix.com/blog/crontrap-emulated-linux-environments-as-the-latest-tactic-in-malware-staging/"
     strings:

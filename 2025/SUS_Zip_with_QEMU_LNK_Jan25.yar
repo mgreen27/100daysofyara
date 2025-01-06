@@ -49,5 +49,5 @@ rule SUS_Zip_with_QEMU_LNK_Jan25
 
     condition:
         uint16(0) == 0x4B50 and $payload
-        and 15 of ($import*)
+        and 25 of ($import*)
 }

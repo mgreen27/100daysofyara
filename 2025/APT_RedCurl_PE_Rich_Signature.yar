@@ -1,0 +1,14 @@
+import "pe"
+
+rule APT_RedCurl_PR_Rich_Signature_Jan25
+{
+    meta:
+        description = "Detects PE rich_signature related to RedCurl malware."
+        author = "Matt Green - @mgreen27"
+        reference = "https://www.huntress.com/blog/the-hunt-for-redcurl-2"
+        hash = "574a55706697d7e0109cf920ae6e0047cd7a802c9ad457e3b68e7802f3f902ef"
+        date = "2025-01-14"
+    condition:
+        uint16(0) == 0x5A4D
+        and pe.rich_signature.clear_data == "DanS\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xd3r\x03\x01\x05\x00\x00\x00\xd3r\x05\x01\x97\x00\x00\x00\xd3r\x04\x01\n\x00\x00\x00Ru\x04\x01\x10\x00\x00\x00Ru\x03\x01\n\x00\x00\x00Ru\x05\x01,\x00\x00\x00\xd3r\x01\x01\x03\x00\x00\x00\x00\x00\x01\x00Z\x00\x00\x00\x00\x00\x00\x00N\x00\x00\x00\xc4u\t\x01\x01\x00\x00\x00\xc4u\x02\x01\x01\x00\x00\x00"
+}

@@ -1,4 +1,4 @@
-SUS_MSC_Icon_Pdf_Jan25
+rule SUS_MSC_Icon_Pdf_Jan25
 {
     meta:
         description = "Detects MSC with suspicious PDF icon observed in use by APT"

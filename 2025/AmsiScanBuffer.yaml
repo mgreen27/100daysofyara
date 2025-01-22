@@ -1,4 +1,5 @@
 name: Windows.Detection.AmsiScanBuffer
+author: Matt Green - @mgreen27
 description: |
    This artifact will detect a AmsiScanBuffer patched clr.dll mapped memory section. 
    

@@ -1,0 +1,55 @@
+name: Windows.Detection.AmsiScanBuffer
+description: |
+   This artifact will detect a AmsiScanBuffer patched clr.dll mapped memory section. 
+   
+   In late september 2024 the infosec community noted Microsoft detecting 
+   manipulation of security critical APIs such as AMSI.dll::AmsiScanBuffer which 
+   was a common AMSI bypass technique. A subsequenct workaround was to patch 
+   clr.dll directly in memory.
+   
+reference:
+    - https://practicalsecurityanalytics.com/new-amsi-bypss-technique-modifying-clr-dll-in-memory/
+    
+type: CLIENT
+
+parameters:
+   - name: TargetDllRegex
+     default: \\clr\.dll$
+   - name: YaraRule
+     default: |
+        rule EXPL_MEM_AmsiScanBuffer_Jan25 {
+            meta:
+                description = "Detects AmsiScanBuffer bypass in clr.dll mapped memory sections."
+                author = "Matt Green - @mgreen27"
+                date = "2025-01-22"
+                reference = "https://practicalsecurityanalytics.com/new-amsi-bypss-technique-modifying-clr-dll-in-memory/"
+                note = "This rule is written for Velociraptor!"
+                artifact = "Windows.System.VAD - target clr.dll mapped sections"
+            strings:
+                $amsi = { 
+                        61 00 6d 00 73 00 69 00 2e 00 64 00 6c 00 6c 00 // amsi.dll
+                        00 00 00 00 00 00 00 00 [16] 
+                        44 00 6f 00 74 00 4e 00 65 00 74 00 00 00 00 00 // DotNet
+                        41 6d 73 69 49 6e 69 74 69 61 6c 69 7a 65 // AmsiInitialize
+                    }
+                $scanbuffer = "AmsiScanBuffer" ascii
+            condition:
+                $amsi and not $scanbuffer
+        }
+
+
+sources:
+  - precondition:
+      SELECT OS From info() where OS = 'windows' 
+      
+    query: |
+      SELECT * 
+      FROM Artifact.Windows.System.VAD(
+            MappingNameRegex=TargetDllRegex,
+            SuspiciousContent=YaraRule,
+            ContextBytes=0
+        )
+
+column_types:
+  - name: HitContext
+    type: preview_upload

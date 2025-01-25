@@ -2,7 +2,7 @@ import "pe"
 
 rule SUS_PE_MicrosoftTeamsNotSignedByMicrosoft_Jan25 {
     meta:
-        description = "Detects PE files masqurading as Microsoft Teams not signed by Micorosoft"
+        description = "Detects PE files masquerading as Microsoft Teams not signed by Microsoft"
         author = "Matt Green - @mgreen27"
         date = "2025-01-24"
 	reference = "https://x.com/SquiblydooBlog/status/1881853095262761471"

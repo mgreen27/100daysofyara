@@ -3,7 +3,7 @@ rule sus_msi_velociraptor
     meta:
         author = "Matt Green - @mgreen27"
         description = "Detects unique strings in Velociraptor MSI files"
-        date = "2025-1-07"
+        date = "2026-1-07"
 
     strings:
         $msi1 = "ci_build_url:" ascii
@@ -24,7 +24,7 @@ rule sus_msi_velociraptor_workersdev
     meta:
         author = "Matt Green - @mgreen27"
         description = "Detects Velociraptor MSI files with workers.dev"
-        date = "2025-1-07"
+        date = "2026-1-07"
 
     strings:
         $msi1 = "ci_build_url:" ascii
